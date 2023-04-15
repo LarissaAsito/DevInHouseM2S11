@@ -4,6 +4,7 @@ import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.mappers.PerguntaMapper;
 import org.senai.semana11.quizzes.mappers.RespostaMapper;
 import org.senai.semana11.quizzes.models.Pergunta;
+import org.senai.semana11.quizzes.models.Resposta;
 import org.senai.semana11.quizzes.repositories.PerguntaRepository;
 import org.senai.semana11.quizzes.repositories.RespostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class RespostaService {
             return mapper.map(respostaRepository.findByPergunta(pergunta));
         }
         return mapper.map(respostaRepository.findAll());
+    }
+
+    public void cadastra(RespostaRequest respostaRequest) {
+        Resposta resposta = mapper.map(respostaRequest);
+        respostaRepository.save(resposta);
     }
 }
