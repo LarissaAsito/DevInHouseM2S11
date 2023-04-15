@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.services;
 
+import org.senai.semana11.quizzes.dtos.QuizPutRequest;
 import org.senai.semana11.quizzes.dtos.QuizRequest;
 import org.senai.semana11.quizzes.dtos.QuizResponse;
 import org.senai.semana11.quizzes.mappers.QuizMapper;
@@ -28,6 +29,19 @@ public class QuizService {
 
     public void cadastra(QuizRequest quizRequest) {
         Quiz quiz = mapper.map(quizRequest);
+        quizRepository.save(quiz);
+    }
+
+    public void atualiza(QuizPutRequest request){
+        Quiz quiz = quizRepository.findById(request.getId());
+
+        if (request.getNome() != null && request.getNome().length() > 0) {
+            quiz.setNome(request.getNome());
+        }
+        if (request.getDescricao() != null && request.getDescricao().length() > 0) {
+            quiz.setDescricao(request.getDescricao());
+        }
+
         quizRepository.save(quiz);
     }
 }

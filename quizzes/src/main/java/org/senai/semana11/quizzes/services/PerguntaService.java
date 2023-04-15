@@ -16,6 +16,8 @@ import java.util.List;
 public class PerguntaService {
     @Autowired
     private PerguntaRepository perguntaRepository;
+    @Autowired
+    private QuizRepository quizRepository;
 
     @Autowired
     private PerguntaMapper mapper;
@@ -32,6 +34,23 @@ public class PerguntaService {
 
     public void cadastra(PerguntaRequest perguntaRequest) {
         Pergunta pergunta = mapper.map(perguntaRequest);
+        perguntaRepository.save(pergunta);
+    }
+
+    public void atualiza(PerguntaPutRequest request){
+        Pergunta pergunta = perguntaRepository.findById(request.getId());
+
+        if (request.getTexto() != null && request.getTexto().length() > 0) {
+            pergunta.setTexto(request.getTexto());
+        }
+        if (request.getTitulo() != null && request.getTitulo().length() > 0) {
+            pergunta.setTitulo(request.getTitulo());
+        }
+        if (request.getQuizId() != null) {
+            Quiz quiz = quizRepository.findById(request.getQuizId()).orElseThrow(RuntimeException::new);
+            pergunta.setQuiz(quiz);
+        }
+
         perguntaRepository.save(pergunta);
     }
 }

@@ -28,4 +28,9 @@ public class RespostaController {
     public void cadastra(@RequestBody RespostaRequest request) {
         respostaService.cadastra(request);
     }
+
+    @PutMapping
+    public void atualiza(@RequestBody RespostaPutRequest request) {
+        respostaService.atualiza(request);
+    }
 }

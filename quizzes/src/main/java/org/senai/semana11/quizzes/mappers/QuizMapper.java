@@ -3,6 +3,7 @@ package org.senai.semana11.quizzes.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
+import org.senai.semana11.quizzes.dtos.QuizPutRequest;
 import org.senai.semana11.quizzes.dtos.QuizRequest;
 import org.senai.semana11.quizzes.dtos.QuizResponse;
 import org.senai.semana11.quizzes.models.Quiz;
@@ -19,4 +20,6 @@ public interface QuizMapper {
     QuizResponse map(Quiz source);
 
     Quiz map(QuizRequest source);
+
+    Quiz map(QuizPutRequest source);
 }

@@ -3,10 +3,7 @@ package org.senai.semana11.quizzes.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-import org.senai.semana11.quizzes.dtos.PerguntaRequest;
-import org.senai.semana11.quizzes.dtos.PerguntaResponse;
-import org.senai.semana11.quizzes.dtos.RespostaRequest;
-import org.senai.semana11.quizzes.dtos.RespostaResponse;
+import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.models.Pergunta;
 import org.senai.semana11.quizzes.models.Resposta;
 
@@ -19,4 +16,7 @@ public interface RespostaMapper {
 
     @Mapping(target = "pergunta.id", source = "perguntaId")
     Resposta map(RespostaRequest source);
+
+    @Mapping(target = "pergunta.id", source = "perguntaId")
+    Resposta map(RespostaPutRequest source);
 }

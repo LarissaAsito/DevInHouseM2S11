@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.controllers;
 
+import org.senai.semana11.quizzes.dtos.QuizPutRequest;
 import org.senai.semana11.quizzes.dtos.QuizRequest;
 import org.senai.semana11.quizzes.dtos.QuizResponse;
 import org.senai.semana11.quizzes.models.Quiz;
@@ -29,5 +30,10 @@ public class QuizController {
     @PostMapping
     public void cadastra(@RequestBody QuizRequest request) {
         quizService.cadastra(request);
+    }
+
+    @PutMapping
+    public void atualiza(@RequestBody QuizPutRequest request) {
+        quizService.atualiza(request);
     }
 }

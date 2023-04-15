@@ -29,4 +29,8 @@ public class PerguntaController {
         perguntaService.cadastra(request);
     }
 
+    @PutMapping
+    public void atualiza(@RequestBody PerguntaPutRequest request) {
+        perguntaService.atualiza(request);
+    }
 }
