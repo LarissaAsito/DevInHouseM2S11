@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.services;
 
+import org.senai.semana11.quizzes.dtos.PerguntaGetRequest;
 import org.senai.semana11.quizzes.dtos.PerguntaResponse;
 import org.senai.semana11.quizzes.dtos.QuizResponse;
 import org.senai.semana11.quizzes.dtos.RespostaResponse;
@@ -19,10 +20,14 @@ public class PerguntaService {
 
     @Autowired
     private PerguntaMapper mapper;
-    public List<PerguntaResponse> getAllPerguntas(){
-        return mapper.map(perguntaRepository.findAll());
-    }
     public PerguntaResponse busca(int id) {
         return mapper.map(perguntaRepository.findById(id));
+    }
+
+    public List<PerguntaResponse> busca(PerguntaGetRequest requestParams) {
+        if (requestParams.getNomeQuiz() != null) {
+            return mapper.map(perguntaRepository.findByNomeDoQuiz(requestParams.getNomeQuiz()));
+        }
+        return mapper.map(perguntaRepository.findAll());
     }
 }

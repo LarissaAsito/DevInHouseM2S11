@@ -1,8 +1,6 @@
 package org.senai.semana11.quizzes.controllers;
 
-import org.senai.semana11.quizzes.dtos.PerguntaResponse;
-import org.senai.semana11.quizzes.dtos.QuizResponse;
-import org.senai.semana11.quizzes.dtos.RespostaResponse;
+import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.services.PerguntaService;
 import org.senai.semana11.quizzes.services.RespostaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,14 @@ import java.util.List;
 public class RespostaController {
     @Autowired
     private RespostaService respostaService;
-    @GetMapping
-    public List<RespostaResponse> listarRespostas() {
-        return respostaService.getAllRespostas();
-    }
+
     @GetMapping("/{id}")
     public RespostaResponse getResposta(@PathVariable int id) {
         return respostaService.busca(id);
+    }
+
+    @GetMapping
+    public List<RespostaResponse> busca(RespostaGetRequest params) {
+        return respostaService.busca(params);
     }
 }

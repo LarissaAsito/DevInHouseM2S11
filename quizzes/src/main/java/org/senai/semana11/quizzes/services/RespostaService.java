@@ -1,10 +1,9 @@
 package org.senai.semana11.quizzes.services;
 
-import org.senai.semana11.quizzes.dtos.PerguntaResponse;
-import org.senai.semana11.quizzes.dtos.QuizResponse;
-import org.senai.semana11.quizzes.dtos.RespostaResponse;
+import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.mappers.PerguntaMapper;
 import org.senai.semana11.quizzes.mappers.RespostaMapper;
+import org.senai.semana11.quizzes.models.Pergunta;
 import org.senai.semana11.quizzes.repositories.PerguntaRepository;
 import org.senai.semana11.quizzes.repositories.RespostaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +24,14 @@ public class RespostaService {
 
     public RespostaResponse busca(int id) {
         return mapper.map(respostaRepository.findById(id));
+    }
+
+    public List<RespostaResponse> busca(RespostaGetRequest requestParams) {
+        if (requestParams.getPerguntaId() != null) {
+            Pergunta pergunta = new Pergunta();
+            pergunta.setId(requestParams.getPerguntaId());
+            return mapper.map(respostaRepository.findByPergunta(pergunta));
+        }
+        return mapper.map(respostaRepository.findAll());
     }
 }

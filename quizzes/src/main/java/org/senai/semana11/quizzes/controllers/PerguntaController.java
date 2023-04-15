@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.controllers;
 
+import org.senai.semana11.quizzes.dtos.PerguntaGetRequest;
 import org.senai.semana11.quizzes.dtos.PerguntaResponse;
 import org.senai.semana11.quizzes.dtos.QuizResponse;
 import org.senai.semana11.quizzes.dtos.RespostaResponse;
@@ -18,13 +19,15 @@ import java.util.List;
 public class PerguntaController {
     @Autowired
     private PerguntaService perguntaService;
-    @GetMapping
-    public List<PerguntaResponse> listarPerguntas() {
-        return perguntaService.getAllPerguntas();
-    }
 
     @GetMapping("/{id}")
     public PerguntaResponse getPergunta(@PathVariable int id) {
         return perguntaService.busca(id);
     }
+
+    @GetMapping
+    public List<PerguntaResponse> busca(PerguntaGetRequest params) {
+        return perguntaService.busca(params);
+    }
+
 }
