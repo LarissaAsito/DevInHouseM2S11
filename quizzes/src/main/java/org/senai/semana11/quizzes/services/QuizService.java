@@ -44,4 +44,8 @@ public class QuizService {
 
         quizRepository.save(quiz);
     }
+
+    public void excluir(int id) {
+        quizRepository.deleteById(id);
+    }
 }

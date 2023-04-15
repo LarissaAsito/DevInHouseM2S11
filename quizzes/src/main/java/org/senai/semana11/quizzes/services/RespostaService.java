@@ -56,4 +56,8 @@ public class RespostaService {
 
         respostaRepository.save(resposta);
     }
+
+    public void excluir(int id) {
+        respostaRepository.deleteById(id);
+    }
 }

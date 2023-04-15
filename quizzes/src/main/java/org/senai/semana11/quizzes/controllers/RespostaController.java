@@ -33,4 +33,9 @@ public class RespostaController {
     public void atualiza(@RequestBody RespostaPutRequest request) {
         respostaService.atualiza(request);
     }
+
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable int id) {
+        respostaService.excluir(id);
+    }
 }

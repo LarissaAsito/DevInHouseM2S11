@@ -33,4 +33,9 @@ public class PerguntaController {
     public void atualiza(@RequestBody PerguntaPutRequest request) {
         perguntaService.atualiza(request);
     }
+
+    @DeleteMapping("/{id}")
+    public void excluir(@PathVariable int id) {
+        perguntaService.excluir(id);
+    }
 }
