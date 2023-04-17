@@ -1,16 +1,14 @@
 package org.senai.semana11.quizzes.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.mappers.PerguntaMapper;
-import org.senai.semana11.quizzes.mappers.QuizMapper;
 import org.senai.semana11.quizzes.models.Pergunta;
 import org.senai.semana11.quizzes.models.Quiz;
 import org.senai.semana11.quizzes.repositories.PerguntaRepository;
 import org.senai.semana11.quizzes.repositories.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class PerguntaService {
     @Autowired
     private PerguntaMapper mapper;
     public PerguntaResponse busca(int id) {
-        return mapper.map(perguntaRepository.findById(id));
+        return mapper.map(perguntaRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
     public List<PerguntaResponse> busca(PerguntaGetRequest requestParams) {
@@ -34,13 +32,14 @@ public class PerguntaService {
         return mapper.map(perguntaRepository.findAll());
     }
 
-    public void cadastra(PerguntaRequest perguntaRequest) {
+    public Pergunta cadastra(PerguntaRequest perguntaRequest) {
         Pergunta pergunta = mapper.map(perguntaRequest);
         perguntaRepository.save(pergunta);
+        return pergunta;
     }
 
     public void atualiza(PerguntaPutRequest request){
-        Pergunta pergunta = perguntaRepository.findById(request.getId());
+        Pergunta pergunta = perguntaRepository.findById(request.getId()).orElseThrow(EntityNotFoundException::new);
 
         if (request.getTexto() != null && request.getTexto().length() > 0) {
             pergunta.setTexto(request.getTexto());

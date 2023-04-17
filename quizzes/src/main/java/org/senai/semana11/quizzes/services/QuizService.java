@@ -8,9 +8,11 @@ import org.senai.semana11.quizzes.models.Quiz;
 import org.senai.semana11.quizzes.repositories.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 @Service
 public class QuizService {
@@ -24,7 +26,9 @@ public class QuizService {
     }
 
     public QuizResponse busca(int id) {
-        return mapper.map(quizRepository.findById(id));
+        Quiz quiz = quizRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+
+        return mapper.map(quiz);
     }
 
     public void cadastra(QuizRequest quizRequest) {
@@ -33,7 +37,7 @@ public class QuizService {
     }
 
     public void atualiza(QuizPutRequest request){
-        Quiz quiz = quizRepository.findById(request.getId());
+        Quiz quiz = quizRepository.findById(request.getId()).orElseThrow(EntityNotFoundException::new);
 
         if (request.getNome() != null && request.getNome().length() > 0) {
             quiz.setNome(request.getNome());

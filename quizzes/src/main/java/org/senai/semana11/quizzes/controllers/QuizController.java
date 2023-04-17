@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.controllers;
 
+import jakarta.validation.Valid;
 import org.senai.semana11.quizzes.dtos.QuizPutRequest;
 import org.senai.semana11.quizzes.dtos.QuizRequest;
 import org.senai.semana11.quizzes.dtos.QuizResponse;
@@ -23,12 +24,12 @@ public class QuizController {
     }
 
     @GetMapping("/{id}")
-    public QuizResponse getQuiz(@PathVariable int id) {
-        return quizService.busca(id);
+    public ResponseEntity<QuizResponse> getQuiz(@PathVariable @Valid int id) {
+        return ResponseEntity.ok(quizService.busca(id));
     }
 
     @PostMapping
-    public void cadastra(@RequestBody QuizRequest request) {
+    public void cadastra(@RequestBody @Valid QuizRequest request) {
         quizService.cadastra(request);
     }
 

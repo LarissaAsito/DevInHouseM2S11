@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface RespostaRepository extends JpaRepository<Resposta, Integer> {
-    Resposta findById(int id);
+    //Resposta findById(int id);
 
     List<Resposta> findByPergunta(Pergunta categoria);
 }

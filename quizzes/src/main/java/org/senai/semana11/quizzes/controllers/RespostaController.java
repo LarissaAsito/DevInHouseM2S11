@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.controllers;
 
+import jakarta.validation.Valid;
 import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.services.PerguntaService;
 import org.senai.semana11.quizzes.services.RespostaService;
@@ -25,7 +26,7 @@ public class RespostaController {
     }
 
     @PostMapping
-    public void cadastra(@RequestBody RespostaRequest request) {
+    public void cadastra(@RequestBody @Valid RespostaRequest request) {
         respostaService.cadastra(request);
     }
 

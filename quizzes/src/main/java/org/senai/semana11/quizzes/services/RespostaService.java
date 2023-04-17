@@ -1,5 +1,6 @@
 package org.senai.semana11.quizzes.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.senai.semana11.quizzes.dtos.*;
 import org.senai.semana11.quizzes.mappers.PerguntaMapper;
 import org.senai.semana11.quizzes.mappers.RespostaMapper;
@@ -26,7 +27,7 @@ public class RespostaService {
     }
 
     public RespostaResponse busca(int id) {
-        return mapper.map(respostaRepository.findById(id));
+        return mapper.map(respostaRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
     public List<RespostaResponse> busca(RespostaGetRequest requestParams) {
@@ -44,7 +45,7 @@ public class RespostaService {
     }
 
     public void atualiza(RespostaPutRequest request){
-        Resposta resposta = respostaRepository.findById(request.getId());
+        Resposta resposta = respostaRepository.findById(request.getId()).orElseThrow(EntityNotFoundException::new);
 
         if (request.getTexto() != null && request.getTexto().length() > 0) {
             resposta.setTexto(request.getTexto());

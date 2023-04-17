@@ -1,11 +1,14 @@
 package org.senai.semana11.quizzes.dtos;
 
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 import org.senai.semana11.quizzes.models.Quiz;
 
 public class PerguntaRequest {
+    @NotBlank
     private String titulo;
     private String texto;
+
     private Integer quizId;
 
     public String getTitulo() {
